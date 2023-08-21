@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{usuario.edit.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{usuario.edit.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/usuarios}" th:text="#{usuario.edit.back}" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('usuario')}" />
+            <form th:action="${T(com.bootcamp.ejercicio7m6.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='usuario', field='nombre')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='usuario', field='apellido')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='usuario', field='nombreUsuario')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='usuario', field='contrasenha')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='usuario', field='tipoUsuario')}" />
+                <input type="submit" th:value="#{usuario.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

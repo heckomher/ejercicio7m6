@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_SCHEMA}?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    dbcp2:
+      max-wait-millis: 30000
+      validation-query: /* ping */ select 1
+      validation-query-timeout: 30
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        id:
+          new_generator_mappings: true
+  mvc:
+    format:
+      date: yyyy-MM-dd
+      date-time: yyyy-MM-dd'T'HH:mm:ss
+      time: HH:mm:ss

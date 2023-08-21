@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{capacitacion.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{capacitacion.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/capacitacions/add}" th:text="#{capacitacion.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:if="${capacitacions.empty}" th:text="#{capacitacion.list.empty}" />
+            <div th:if="${!capacitacions.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{capacitacion.numCapacitacion.label}" scope="col" />
+                            <th th:text="#{capacitacion.cantidadAsistentes.label}" scope="col" />
+                            <th th:text="#{capacitacion.detalle.label}" scope="col" />
+                            <th th:text="#{capacitacion.diaSemana.label}" scope="col" />
+                            <th th:text="#{capacitacion.duracion.label}" scope="col" />
+                            <th th:text="#{capacitacion.hora.label}" scope="col" />
+                            <th th:text="#{capacitacion.lugar.label}" scope="col" />
+                            <th th:text="#{capacitacion.nombre.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="capacitacion : ${capacitacions}">
+                            <td th:text="${capacitacion.numCapacitacion}" />
+                            <td th:text="${capacitacion.cantidadAsistentes}" />
+                            <td th:text="${capacitacion.detalle}" />
+                            <td th:text="${capacitacion.diaSemana}" />
+                            <td th:text="${capacitacion.duracion}" />
+                            <td th:text="${capacitacion.hora}" />
+                            <td th:text="${capacitacion.lugar}" />
+                            <td th:text="${capacitacion.nombre}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/capacitacions/edit/{numCapacitacion}(numCapacitacion=${capacitacion.numCapacitacion})}" th:text="#{capacitacion.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/capacitacions/delete/{numCapacitacion}(numCapacitacion=${capacitacion.numCapacitacion})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{capacitacion.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
